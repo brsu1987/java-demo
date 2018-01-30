@@ -1,0 +1,35 @@
+server:
+  port: 8080
+spring:
+  devtools:
+    restart:
+      enabled: true
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf-8
+  thymeleaf:
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+#mybatis
+mybatis:
+  type-aliases-package: com.brsu.demo.entity
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    use-generated-keys: true
+    use-column-label: true
+    map-underscore-to-camel-case: true
+#mapper
+mapper:
+  mappers: com.brsu.demo.mapper.BaseMapper
+  not-empty: false
+  identity: MYSQL
+#pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

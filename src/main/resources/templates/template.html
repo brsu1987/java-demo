@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="htmlhead">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="shortcut icon" type="image/png" th:href="@{/image/logo.png}"/>
+    <!--/*@thymesVar id="title" type="标题"*/-->
+    <title th:text="${title}">[标题]</title>
+    <link th:href="@{/plugin/layui/css/layui.css}" rel="stylesheet"/>
+    <link th:href="@{/css/global.css}" rel="stylesheet"/>
+    <link th:href="@{/plugin/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
+    <script th:src="@{/plugin/layui/layui.js}"></script>
+</head>
+
+<body th:fragment="htmlbody" class="layui-layout-body">
+<div class="layui-layout layui-layout-admin" style="border-bottom: solid 5px #1aa094;">
+    <div class="layui-header header header-demo">
+        <div class="layui-main">
+            <div class="admin-login-box">
+                <a class="logo" style="left: 0;" href="http://beginner.zhengjinfan.cn/demo/beginner_admin/">
+                    <span style="font-size: 22px;">Demo</span>
+                </a>
+                <div class="admin-side-toggle">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </div>
+                <div class="admin-side-full">
+                    <i class="fa fa-life-bouy" aria-hidden="true"></i>
+                </div>
+            </div>
+            <ul class="layui-nav admin-header-item">
+                <li class="layui-nav-item">
+                    <a href="javascript:;" class="admin-header-user"><img src="image/logo.png" /><span id="main_user">brsu</span></a>
+                    <dl class="layui-nav-child">
+                        <dd id="changePwd">
+                            <a href="javascript:;"><i class="fa fa-gear" aria-hidden="true"></i> 修改密码</a>
+                        </dd>
+                        <dd id="sysout">
+                            <a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-side layui-bg-black" id="admin-side">
+        <div class="layui-side-scroll" id="admin-navbar-side" lay-filter="side"></div>
+    </div>
+
+    <div class="layui-body" style="bottom: 0;border-left: solid 2px #1AA094;" id="admin-body">
+        <div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
+            <ul class="layui-tab-title">
+                <li class="layui-this">
+                    <i class="fa fa-dashboard" aria-hidden="true"></i>
+                    <cite>首页</cite>
+                </li>
+            </ul>
+            <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
+                <div class="layui-tab-item layui-show">
+                    <iframe src="home"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-footer footer footer-demo" id="admin-footer">
+        <div class="layui-main">
+            <p>
+                2018 &copy; brsu LGPL license
+            </p>
+        </div>
+    </div>
+    <div class="site-tree-mobile layui-hide">
+        <i class="layui-icon">&#xe602;</i>
+    </div>
+    <div class="site-mobile-shade"></div>
+</div>
+</body>
+</html>

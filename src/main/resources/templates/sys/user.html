@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="template :: htmlhead" th:with="title='用户管理'"></head>
+<style>
+    body{overflow-y: scroll;}
+</style>
+<body>
+<div class="admin-main">
+    <form name="searchform" id="searchform" class="layui-form layui-form-pane" method="post" action="">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="operCd" name="operCd" placeholder="请输入" autocomplete="off" class="layui-input"/>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">真实姓名</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="operNm" name="operNm" placeholder="请输入" autocomplete="off" class="layui-input"/>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <button id="btnSearch" type="button" class="layui-btn">查询</button>
+                <button id="btnRetSet" type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <button id="btnAdd" type="button" class="layui-btn">新增</button>
+                <button id="btnUpdate" type="button" class="layui-btn">修改</button>
+            </div>
+        </div>
+    </form>
+
+    <table class="layui-hide" id="test"></table>
+
+</div>
+</body>
+<script>
+/*    layui.use('table', function() {
+        var table = layui.table;
+    });*/
+    layui.use('table', function(){
+        var table = layui.table,
+            $ = layui.jquery;
+
+        var code = $("#operCd").val();
+        var name = $("#operNm").val();
+        table.render({
+            elem: '#test'
+            ,url:'/sys/listSysUser'
+            //,url:'/data/table.json'
+            ,method: 'post'
+            ,id : 'searchID'
+            ,where: {code:code, name:name}
+            ,request: {
+                pageName: 'pageNum' //页码的参数名称，默认：page
+                ,limitName: 'pageSize' //每页数据量的参数名，默认：limit
+            }
+            ,response: {
+                statusName: 'respCode' //数据状态的字段名称，默认：code
+                ,statusCode: 200 //成功的状态码，默认：0
+                ,msgName: 'respMessage' //状态信息的字段名称，默认：msg
+                ,countName: 'pageTotal' //数据总数的字段名称，默认：count
+                ,dataName: 'pageRows' //数据列表的字段名称，默认：data
+            }
+            ,cols: [[
+                {type:'checkbox'}
+                ,{field:'id', width:80, title: 'ID', sort: true}
+                ,{field:'code', width:80, title: '用户编号'}
+                ,{field:'name', width:80, title: '用户名称', sort: true}
+                ,{field:'password', width:80, title: '密码'}
+                ,{field:'status', title: '状态', minWidth: 100}
+                ,{field:'orgCode', width:80, title: '所属机构', sort: true}
+            ]]
+            ,page: true
+            ,limits: [10, 20, 30, 40, 50]
+            ,height: 'full-150'
+        });
+
+        $('#btnSearch').on('click', function() {
+            //index = layer.load(1);//开启进度条
+            //var searchform = commonUtil.serializeObject($("#searchform"));//查询页面表单ID
+            //alert(JSON.stringify(searchform));
+            var code = $("#operCd").val();
+            var name = $("#operNm").val();
+            table.reload('searchID', {
+                where : {code:code, name:name}
+            });
+        });
+    });
+</script>
+
+</html>
